@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Café Aroma Premium</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #4e342e;
+      --primary-light: #7b5e57;
+      --accent: #c7a17a;
+      --bg: #fdfbf7;
+      --surface: #ffffff;
+      --text: #2c2523;
+      --text-muted: #706461;
+      --border: #eeded1;
+      --shadow: rgba(78, 52, 46, 0.08);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --primary: #d7ccc8;
+      --primary-light: #b0bec5;
+      --accent: #e5c158;
+      --bg: #12100f;
+      --surface: #1e1a18;
+      --text: #f5f2f0;
+      --text-muted: #a19390;
+      --border: #3a3230;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); transition: var(--transition); overflow-x: hidden; }
+    h1, h2, h3, .logo { font-family: 'Playfair Display', serif; }
+
+    /* --- HEADER & NAV --- */
+    header { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 16px 6%; background: var(--surface); box-shadow: 0 2px 20px var(--shadow); z-index: 100; transition: var(--transition); }
+    .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+    nav { display: flex; gap: 30px; }
+    nav a { text-decoration: none; color: var(--text-muted); font-weight: 500; cursor: pointer; transition: var(--transition); }
+    nav a:hover, nav a.active { color: var(--primary); }
+    .nav-actions { display: flex; align-items: center; gap: 15px; }
+    .btn-icon { background: none; border: none; font-size: 20px; color: var(--text); cursor: pointer; position: relative; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; transition: var(--transition); }
+    .btn-icon:hover { background: var(--border); }
+    #count { position: absolute; top: 2px; right: 2px; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 10px; font-family: sans-serif; }
+    .menu-toggle { display: none; }
+
+    /* --- HERO --- */
+    .hero { height: 65vh; background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80') center/cover fixed; display: grid; place-items: center; color: #fff; text-align: center; padding: 20px; }
+    .hero-content h1 { font-size: 48px; margin-bottom: 16px; letter-spacing: 1px; }
+    .hero-content p { font-size: 18px; font-weight: 300; opacity: 0.9; }
+
+    /* --- DESTACADOS (CARRUSEL AUTOMÁTICO) --- */
+    .promo-carousel { max-width: 1200px; margin: 40px auto; padding: 0 20px; position: relative; overflow: hidden; }
+    .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+    .carousel-slide { min-width: 100%; display: flex; align-items: center; background: var(--surface); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px var(--shadow); border: 1px solid var(--border); }
+    .carousel-img { width: 50%; height: 350px; object-fit: cover; }
+    .carousel-info { padding: 40px; width: 50%; }
+    .carousel-info h3 { font-size: 28px; margin-bottom: 10px; color: var(--primary); }
+    .carousel-info p { color: var(--text-muted); margin-bottom: 20px; }
+    .badge { background: var(--accent); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-block; margin-bottom: 10px; }
+
+    /* --- CATEGORÍAS & BUSCADOR --- */
+    .shop-controls { max-width: 1200px; margin: 40px auto 20px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .categories { display: flex; gap: 10px; flex-wrap: wrap; }
+    .cat-btn { background: var(--surface); border: 1px solid var(--border); padding: 8px 20px; border-radius: 30px; cursor: pointer; font-weight: 500; color: var(--text-muted); transition: var(--transition); }
+    .cat-btn.active, .cat-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .search-wrapper { position: relative; width: 300px; }
+    .search-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+    #search { width: 100%; padding: 12px 15px 12px 42px; border-radius: 30px; border: 1px solid var(--border); background: var(--surface); color: var(--text); outline: none; transition: var(--transition); }
+    #search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(199, 161, 122, 0.2); }
+
+    /* --- PRODUCTOS GRID --- */
+    .grid { max-width: 1200px; margin: 0 auto 60px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+    .card { background: var(--surface); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px var(--shadow); border: 1px solid var(--border); transition: var(--transition); display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 16px 35px rgba(78, 52, 46, 0.15); }
+    .img-container { position: relative; overflow: hidden; height: 200px; }
+    .card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--transition); }
+    .card:hover img { transform: scale(1.06); }
+    .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+    .card-body h3 { font-size: 20px; margin-bottom: 8px; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 15px; }
+    .price { font-size: 22px; font-weight: 700; color: var(--primary); }
+    .btn-add { background: var(--primary); color: #fff; border: none; padding: 10px 16px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 8px; }
+    .btn-add:hover { background: var(--accent); }
+
+    /* --- SOBRE NOSOTROS --- */
+    .about-section { background: var(--surface); padding: 80px 6%; display: flex; align-items: center; gap: 50px; max-width: 1200px; margin: 40px auto; border-radius: 30px; box-shadow: 0 10px 30px var(--shadow); }
+    .about-content { flex: 1; }
+    .about-content h2 { font-size: 36px; margin-bottom: 20px; color: var(--primary); }
+    .about-content p { color: var(--text-muted); line-height: 1.7; margin-bottom: 15px; }
+    .about-img { flex: 1; border-radius: 20px; overflow: hidden; height: 350px; }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* --- RESEÑAS & FORMULARIO --- */
+    .reviews-section { max-width: 1200px; margin: 60px auto; padding: 0 20px; text-align: center; }
+    .reviews-section h2 { font-size: 36px; margin-bottom: 25px; }
+    .review-form-container { max-width: 600px; margin: 0 auto 40px; background: var(--surface); padding: 25px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 5px 20px var(--shadow); text-align: left; }
+    .review-form-container h3 { margin-bottom: 15px; font-size: 20px; color: var(--primary); }
+    .rating-selector { display: flex; gap: 8px; margin-bottom: 15px; font-size: 22px; cursor: pointer; color: #ccc; }
+    .rating-selector i.active { color: #f1c40f; }
+    .review-form-container textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; outline: none; resize: vertical; height: 80px; margin-bottom: 15px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+    .review-card { background: var(--surface); padding: 30px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 5px 20px var(--shadow); text-align: left; }
+    .stars { color: #f1c40f; margin-bottom: 15px; }
+    .review-text { font-style: italic; color: var(--text-muted); margin-bottom: 15px; }
+    .review-user { font-weight: 600; font-size: 14px; color: var(--primary); }
+
+    /* --- EXTRAS: GALERÍA Y RESERVAS + MAPA --- */
+    .extra-grid { max-width: 1200px; margin: 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .gallery-grid img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; transition: var(--transition); }
+    .gallery-grid img:hover { transform: scale(1.04); }
+    
+    .booking-form { background: var(--surface); padding: 30px; border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 10px 30px var(--shadow); }
+    .booking-form h3 { margin-bottom: 20px; font-size: 24px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group input, .form-group select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; }
+    
+    /* Mini Calendario Custom 2026 */
+    .mini-calendar { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; }
+    .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: bold; font-size: 14px; color: var(--primary); }
+    .calendar-days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; font-size: 12px; }
+    .day-name { font-weight: 600; color: var(--text-muted); padding-bottom: 5px; }
+    .calendar-day { padding: 6px; border-radius: 6px; cursor: pointer; transition: var(--transition); color: var(--text); }
+    .calendar-day:hover:not(.empty) { background: var(--border); }
+    .calendar-day.selected { background: var(--primary) !important; color: #fff !important; font-weight: bold; }
+    .calendar-day.empty { cursor: default; }
+
+    .btn-submit { width: 100%; background: var(--primary); color: #fff; border: none; padding: 12px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: var(--transition); }
+    .btn-submit:hover { background: var(--accent); }
+    
+    /* Mapa con Indicaciones */
+    .map-box { grid-column: span 2; background: var(--surface); border-radius: 24px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px var(--shadow); display: flex; flex-direction: column; }
+    .map-bar { padding: 15px 20px; background: var(--primary); color: white; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .map-bar span { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .btn-directions { background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; text-decoration: none; font-size: 13px; transition: var(--transition); display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .btn-directions:hover { background: #fff; color: var(--primary); }
+    .map-container { height: 350px; width: 100%; }
+
+    /* --- CARRITO / DRAWER --- */
+    #drawer { position: fixed; right: -380px; top: 0; width: 360px; height: 100%; background: var(--surface); transition: cubic-bezier(0.4, 0, 0.2, 1) 0.4s; padding: 25px; box-shadow: -10px 0 30px var(--shadow); overflow-y: auto; z-index: 1000; display: flex; flex-direction: column; }
+    #drawer.open { right: 0; }
+    .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+    .drawer-close-btn { background: none; border: none; font-size: 15px; color: var(--text-muted); cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 5px; font-weight: 600; }
+    .drawer-close-btn:hover { color: var(--primary); }
+    #list { flex-grow: 1; overflow-y: auto; }
+    .cart-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+    .cart-item-img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; }
+    .cart-item-details { flex-grow: 1; }
+    .cart-item-title { font-weight: 600; font-size: 15px; }
+    .cart-item-price { color: var(--accent); font-weight: 700; font-size: 14px; }
+    .quantity-controls { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
+    .qty-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; font-weight: bold; display: grid; place-items: center; }
+    .btn-delete { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 16px; padding: 5px; transition: var(--transition); }
+    .btn-delete:hover { transform: scale(1.1); }
+    .summary-line { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; color: var(--text-muted); }
+    .summary-total { font-size: 20px; color: var(--primary); font-weight: 700; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+    #pay { width: 100%; background: var(--primary); color: #fff; border: none; padding: 15px; border-radius: 30px; font-size: 16px; font-weight: 600; margin-top: 15px; cursor: pointer; transition: var(--transition); }
+    #pay:hover { background: var(--accent); }
+
+    /* --- CHECKOUT DIALOG (MULTI-PANTALLA) --- */
+    dialog { border: none; border-radius: 24px; padding: 30px; max-width: 450px; width: 90%; margin: auto; background: var(--surface); color: var(--text); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+    dialog::backdrop { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); }
+    .step { display: none; }
+    .step.active { display: block; }
+    .step h2 { margin-bottom: 15px; font-size: 26px; color: var(--primary); }
+    .radio-group { margin: 15px 0; }
+    .radio-label { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: var(--transition); }
+    .radio-label:hover { background: var(--bg); }
+    .dialog-footer { display: flex; justify-content: space-between; margin-top: 25px; gap: 10px; }
+    .btn-dialog { flex: 1; padding: 12px; border-radius: 30px; border: none; font-weight: 600; cursor: pointer; transition: var(--transition); }
+    .btn-dialog.next { background: var(--primary); color: #fff; }
+    .btn-dialog.next:hover { background: var(--accent); }
+    .btn-dialog.cancel { background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); }
+    
+    /* --- COMPROBANTE DE PAGO --- */
+    .receipt { background: var(--bg); padding: 20px; border-radius: 12px; border: 1px dashed var(--accent); font-family: monospace; font-size: 14px; margin-top: 15px; max-height: 250px; overflow-y: auto; }
+    .btn-download-receipt { width: 100%; background: #27ae60; color: white; border: none; padding: 12px; border-radius: 30px; font-weight: 600; margin-top: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition); }
+    .btn-download-receipt:hover { background: #219653; }
+
+    /* --- FLOATING EFFECT & FLOATING WHATSAPP --- */
+    .fly { position: fixed; pointer-events: none; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 24px; z-index: 2000; }
+    .whatsapp-btn { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; z-index: 99; transition: var(--transition); }
+    .whatsapp-btn:hover { transform: scale(1.1); background: #20ba5a; }
+
+    /* --- FOOTER --- */
+    footer { background: #1e1a18; color: #ae9f9a; padding: 50px 6% 20px; font-size: 14px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 30px; }
+    .footer-col h4 { color: #fff; font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 20px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; cursor: pointer; transition: var(--transition); }
+    .footer-col ul li:hover { color: var(--accent); }
+    .footer-bottom { border-top: 1px solid #322b28; padding-top: 20px; text-align: center; font-size: 12px; }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .menu-toggle { display: block; font-size: 22px; background: none; border: none; color: var(--text); cursor: pointer; }
+      .about-section { flex-direction: column; padding: 40px 20px; }
+      .extra-grid { grid-template-columns: 1fr; }
+      .map-box { grid-column: span 1; }
+      .carousel-slide { flex-direction: column; }
+      .carousel-img, .carousel-info { width: 100%; height: auto; }
+      .carousel-info { padding: 25px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">☕ Café Aroma</div>
+    <nav id="navbar">
+      <a onclick="scrollToSection('hero')" class="active">Inicio</a>
+      <a onclick="scrollToSection('shop-controls')">Menú</a>
+      <a onclick="scrollToSection('about')">Sobre Nosotros</a>
+      <a onclick="scrollToSection('booking')">Reservas</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn-icon" id="themeBtn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+      <button class="btn-icon" id="cartBtn">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="count">0</span>
+      </button>
+      <button class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1>Cada taza cuenta una historia</h1>
+      <p>Café de especialidad artesanal, repostería fina y momentos memorables.</p>
+    </div>
+  </section>
+
+  <!-- DESTACADOS / CARRUSEL -->
+  <section class="promo-carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide">
+        <img class="carousel-img" src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80" alt="Promo 1">
+        <div class="carousel-info">
+          <span class="badge">Especial del Mes</span>
+          <h3>Café Moca Avellana</h3>
+          <p>Un perfecto balance entre espresso premium, leche cremosa, chocolate oscuro y un toque sutil de avellanas tostadas.</p>
+          <strong>¡Pruébalo hoy por solo Bs 24!</strong>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img class="carousel-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80" alt="Promo 2">
+        <div class="carousel-info">
+          <span class="badge">Nuevos Sabores</span>
+          <h3>Tarde de Latte & Tarta</h3>
+          <p>Disfruta de cualquier tarta de nuestra vitrina y acompáñala con un Latte mediano cremoso recién hecho.</p>
+          <strong>Disponibles de 16:00 a 19:00.</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTROLES TIENDA (BUSCADOR Y CATEGORÍAS) -->
+  <div class="shop-controls" id="shop-controls">
+    <div class="categories" id="categoriesContainer">
+      <button class="cat-btn active" onclick="filterCategory('todos')">Todos</button>
+      <button class="cat-btn" onclick="filterCategory('cafes')">Cafés</button>
+      <button class="cat-btn" onclick="filterCategory('bebidas-frias')">Bebidas Frías</button>
+      <button class="cat-btn" onclick="filterCategory('postres')">Postres</button>
+    </div>
+    <div class="search-wrapper">
+      <i class="fas fa-search"></i>
+      <input id="search" placeholder="Buscar en el menú...">
+    </div>
+  </div>
+
+  <!-- PRODUCTOS GRID -->
+  <div id="products" class="grid"></div>
+
+  <!-- SOBRE NOSOTROS -->
+  <section class="about-section" id="about">
+    <div class="about-content">
+      <h2>Nuestra Pasión por el Grano</h2>
+      <p>En Café Aroma seleccionamos meticulosamente granos de origen local e internacional para asegurar notas aromáticas únicas en cada tostado.</p>
+      <p>Creamos un santuario urbano donde el aroma del buen café se entrelaza con conversaciones inspiradoras y momentos de calma.</p>
+    </div>
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=700&q=80" alt="Nosotros">
+    </div>
+  </section>
+
+  <!-- RESEÑAS -->
+  <section class="reviews-section">
+    <h2>Lo que dicen nuestros Coffee Lovers</h2>
+    
+    <!-- Barra para dejar Reseñas y Puntuar -->
+    <div class="review-form-container">
+      <h3>Califica tu experiencia</h3>
+      <div class="rating-selector" id="ratingSelector">
+        <i class="fas fa-star" data-value="1"></i>
+        <i class="fas fa-star" data-value="2"></i>
+        <i class="fas fa-star" data-value="3"></i>
+        <i class="fas fa-star" data-value="4"></i>
+        <i class="fas fa-star" data-value="5"></i>
+      </div>
+      <textarea id="reviewText" placeholder="Escribe tu opinión aquí..."></textarea>
+      <button class="btn-submit" onclick="submitReview()">Publicar Reseña</button>
+    </div>
+
+    <div class="reviews-grid" id="reviewsGrid">
+      <div class="review-card">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="review-text">"El Capuccino tiene la textura de espuma perfecta. El ambiente es super premium y tranquilo para trabajar."</p>
+        <div class="review-user">- Mariana V.</div>
+      </div>
+      <div class="review-card">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="review-text">"¡El Cheesecake de frutos rojos es de otro planeta! Y la atención al cliente siempre es de primera."</p>
+        <div class="review-user">- Alejandro M.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRAS: GALERÍA Y RESERVAS + MAPA -->
+  <div class="extra-grid" id="booking">
+    <div>
+      <h3 style="margin-bottom: 20px; font-size: 24px;">Galería Aroma</h3>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=400&q=80" alt="1">
+        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80" alt="2">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=400&q=80" alt="3">
+        <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=400&q=80" alt="4">
+      </div>
+    </div>
+    
+    <div class="booking-form">
+      <h3>Reserva tu Mesa (Año 2026)</h3>
+      <form onsubmit="handleReserve(event)">
+        <div class="form-group"><input type="text" placeholder="Nombre completo" required></div>
+        
+        <!-- Mini Calendario Interactivo 2026 -->
+        <div class="mini-calendar">
+          <div class="calendar-header">
+            <button type="button" onclick="changeMonth(-1)" class="cat-btn" style="padding: 2px 8px; font-size: 12px;">&lt;</button><span id="calendarMonthYear">Julio 2026</span><button type="button" onclick="changeMonth(1)" class="cat-btn" style="padding: 2px 8px; font-size: 12px;">&gt;</button>
+          </div>
+          <div class="calendar-days-grid" id="calendarGrid">
+            <!-- Rellenado dinámicamente por JS -->
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <select id="bookingTime"><option>07:30</option><option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option></select>
+        </div>
+        <button type="submit" class="btn-submit">Confirmar Reserva</button>
+      </form>
+    </div>
+
+    <!-- Caja del Mapa en Plaza del Maestro, La Paz (Bolivia) con botón de indicaciones -->
+    <div class="map-box">
+      <div class="map-bar">
+        <span><i class="fas fa-map-marker-alt"></i> Plaza del Maestro, Villa Fátima (La Paz)</span>
+        <!-- Enlace real a Google Maps configurado para dar indicaciones (Directions) directo a la ubicación -->
+        <a class="btn-directions" href="https://www.google.com/maps/dir/?api=1&destination=-16.4839,-68.1132" target="_blank">
+          <i class="fas fa-route"></i> Cómo llegar / Indicaciones
+        </a>
+      </div>
+      <div class="map-container">
+        <!-- Mapa de OpenStreetMap centrado exactamente en Plaza del Maestro, La Paz, Bolivia -->
+        <iframe width="100%" height="100%" frameborder="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-68.1180%2C-16.4880%2C-68.1084%2C-16.4795&amp;layer=mapnik&amp;marker=-16.4839%2C-68.1132" style="border: 0;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARRITO / DRAWER -->
+  <div id="drawer">
+    <div class="drawer-header">
+      <h2>Tu Carrito</h2>
+      <button class="drawer-close-btn" id="closeDrawerBtn">
+         Volver <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+    <div id="list">Carrito vacío</div>
+    
+    <div style="margin-top:20px;">
+      <div class="summary-line"><span>Subtotal:</span><span id="subtotalLabel">Bs 0</span></div>
+      <div class="summary-line"><span>Impuestos (IVA 13%):</span><span id="taxLabel">Bs 0</span></div>
+      <div class="summary-line summary-total"><span>Total:</span><span id="totalLabel">Bs 0</span></div>
+      <button id="pay">Proceder al Pago</button>
+    </div>
+  </div>
+
+  <!-- DIALOG CHECKOUT MULTI-PANTALLA -->
+  <dialog id="dlg">
+    <!-- Pantalla 1: Método de Pago -->
+    <div class="step active" id="step1">
+      <h2>Método de Pago</h2>
+      <p>Selecciona la opción de tu preferencia:</p>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="payMethod" value="Tarjeta" checked onclick="updatePaymentForm('Tarjeta')"> <i class="fas fa-credit-card"></i> Tarjeta de Crédito/Débito</label>
+        <label class="radio-label"><input type="radio" name="payMethod" value="QR" onclick="updatePaymentForm('QR')"> <i class="fas fa-qrcode"></i> Código QR Sin Contacto</label>
+        <label class="radio-label"><input type="radio" name="payMethod" value="Efectivo" onclick="updatePaymentForm('Efectivo')"> <i class="fas fa-money-bill-wave"></i> Efectivo en Caja</label>
+      </div>
+      
+      <!-- Campos para programar fecha/hora de retiro cuando es Efectivo en Caja -->
+      <div id="cashPickupContainer" style="display: none; margin-top: 15px; padding: 12px; background: #fdfbf7; border: 1px solid #eeded1; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif;">
+        <p style="margin: 0 0 10px 0; font-size: 12px; color: #4e342e; font-weight: bold;"><i class="fas fa-clock"></i> Programar fecha y hora de recogida</p>
+        <div style="display: table; width: 100%;">
+          <div style="display: table-cell; width: 50%; padding-right: 4px;">
+            <label style="font-size:11px; color:#706461; display:block; margin-bottom:3px;">Fecha de retiro:</label>
+            <input type="date" id="pickupDate" style="width:100%; padding:8px; border:1px solid #eeded1; border-radius:6px; font-size:13px;" value="2026-07-04">
+          </div>
+          <div style="display: table-cell; width: 50%; padding-left: 4px;">
+            <label style="font-size:11px; color:#706461; display:block; margin-bottom:3px;">Hora de retiro:</label>
+            <input type="time" id="pickupTime" style="width:100%; padding:8px; border:1px solid #eeded1; border-radius:6px; font-size:13px;" value="16:30">
+          </div>
+        </div>
+      </div>
+
+      <!-- Campos de tarjeta simulados para máxima profesionalidad -->
+      <div id="cardFieldsContainer" style="margin-top: 15px; padding: 12px; background: #fdfbf7; border: 1px solid #eeded1; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif;">
+        <p style="margin: 0 0 10px 0; font-size: 12px; color: #4e342e; font-weight: bold;"><i class="fas fa-lock"></i> Pago Seguro de Prueba (Simulado)</p>
+        <div style="margin-bottom: 8px;">
+          <input type="text" id="mockCardNumber" placeholder="Número de Tarjeta (4500 0000 0000 0000)" style="width:100%; padding:8px; border:1px solid #eeded1; border-radius:6px; font-size:13px;" maxlength="19" value="4552 8741 0024 9632">
+        </div>
+        <div style="display: table; width: 100%;">
+          <div style="display: table-cell; width: 50%; padding-right: 4px;">
+            <input type="text" id="mockCardExpiry" placeholder="MM/AA" style="width:100%; padding:8px; border:1px solid #eeded1; border-radius:6px; font-size:13px;" maxlength="5" value="12/29">
+          </div>
+          <div style="display: table-cell; width: 50%; padding-left: 4px;">
+            <input type="password" id="mockCardCvv" placeholder="CVV" style="width:100%; padding:8px; border:1px solid #eeded1; border-radius:6px; font-size:13px;" maxlength="3" value="385">
+          </div>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button class="btn-dialog cancel" onclick="closeCheckout()">Cancelar</button>
+        <button class="btn-dialog next" onclick="goToStep(2)">Continuar</button>
+      </div>
+    </div>
+
+    <!-- Pantalla 2: Resumen y Confirmación con opción de Descarga -->
+    <div class="step" id="step2">
+      <h2>Confirmación</h2>
+      <p>Tu orden ha sido aprobada con éxito.</p>
+      <div class="receipt" id="receiptContent"></div>
+      <button class="btn-download-receipt" onclick="downloadReceiptFile()">
+        <i class="fas fa-download"></i> Descargar Comprobante Digital
+      </button>
+      <div class="dialog-footer">
+        <button class="btn-dialog cancel" onclick="goToStep(1)">Atrás</button>
+        <button class="btn-dialog next" onclick="processOrderEnd()">Finalizar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/59176721293?text=Hola!%20Me%20gustaría%20hacer%20un%20pedido%20de%20Café%20Aroma." class="whatsapp-btn" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Café Aroma</h4>
+        <p>Experiencias de café prémium todos los días de la semana.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Horarios</h4>
+        <p>Lunes a Viernes: 7:30 - 21:30</p>
+        <p>Sábados y Domingos: 8:30 - 22:00</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <p><i class="fas fa-phone"></i> +591 70000000</p>
+        <p><i class="fas fa-envelope"></i> info@cafearoma.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Café Aroma Premium. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    const data = [
+      ['Capuccino Tradicional', 18, 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80', 'cafes'],
+      ['Latte Macchiato', 20, 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80', 'cafes'],
+      ['Espresso Intenso', 14, 'https://images.unsplash.com/photo-1510707577719-0d458b3dc4f4?auto=format&fit=crop&w=600&q=80', 'cafes'],
+      ['Iced Latte Vainilla', 22, 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80', 'bebidas-frias'],
+      ['Frappé de Caramelo', 25, 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80', 'bebidas-frias'],
+      ['Cheesecake New York', 22, 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80', 'postres'],
+      ['Croissant de Almendras', 16, 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80', 'postres']
+    ];
+
+    let cart = {};
+    let currentCategory = 'todos';
+    let selectedRating = 5;
+    let selectedDay2026 = null;
+
+    // RENDERIZAR PRODUCTOS
+    function paint(filterText = '') {
+      const grid = document.getElementById('products');
+      grid.innerHTML = '';
+      
+      data.forEach((p, i) => {
+        if (currentCategory !== 'todos' && p[3] !== currentCategory) return;
+        if (!p[0].toLowerCase().includes(filterText.toLowerCase())) return;
+
+        grid.innerHTML += `
+          <div class="card">
+            <div class="img-container">
+              <img src="${p[2]}" alt="${p[0]}">
+            </div>
+            <div class="card-body">
+              <h3>${p[0]}</h3>
+              <div class="price-row">
+                <span class="price">Bs ${p[1]}</span>
+                <button class="btn-add" onclick="addToCart(${i}, event)">
+                  <i class="fas fa-plus"></i> Agregar
+                </button>
+              </div>
+            </div>
+          </div>`;
+      });
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      paint(document.getElementById('search').value);
+    }
+
+    function addToCart(i, e) {
+      cart[i] = (cart[i] || 0) + 1;
+      
+      const b = e.target.getBoundingClientRect();
+      const f = document.createElement('div');
+      f.className = 'fly';
+      f.textContent = '☕';
+      f.style.left = b.left + 'px';
+      f.style.top = b.top + 'px';
+      document.body.appendChild(f);
+      
+      setTimeout(() => {
+        f.style.left = (window.innerWidth - 50) + 'px';
+        f.style.top = '20px';
+        f.style.opacity = 0;
+        f.style.transform = 'scale(0.3)';
+      }, 20);
+      
+      setTimeout(() => f.remove(), 800);
+      renderCart();
+    }
+
+    function changeQty(i, amt) {
+      if (!cart[i]) return;
+      cart[i] += amt;
+      if (cart[i] <= 0) delete cart[i];
+      renderCart();
+    }
+
+    function deleteItem(i) {
+      delete cart[i];
+      renderCart();
+    }
+
+    // CALCULO DE CARRITO SIN DESCUENTO DEL 10%
+    function renderCart() {
+      let html = '', subtotal = 0, totalItems = 0;
+
+      for (let k in cart) {
+        let q = cart[k], p = data[k];
+        let s = q * p[1];
+        subtotal += s;
+        totalItems += q;
+
+        html += `
+          <div class="cart-item">
+            <img src="${p[2]}" class="cart-item-img">
+            <div class="cart-item-details">
+              <div class="cart-item-title">${p[0]}</div>
+              <div class="cart-item-price">Bs ${s}</div>
+              <div class="quantity-controls">
+                <button class="qty-btn" onclick="changeQty(${k}, -1)">-</button>
+                <span>${q}</span>
+                <button class="qty-btn" onclick="changeQty(${k}, 1)">+</button>
+              </div>
+            </div>
+            <button class="btn-delete" onclick="deleteItem(${k})"><i class="fas fa-trash-alt"></i></button>
+          </div>`;
+      }
+
+      document.getElementById('count').textContent = totalItems;
+      document.getElementById('list').innerHTML = html || '<p style="color:var(--text-muted);">Tu carrito está vacío.</p>';
+      
+      let tax = subtotal * 0.13; // IVA 13%
+      let total = subtotal + tax;
+
+      document.getElementById('subtotalLabel').textContent = 'Bs ' + subtotal.toFixed(2);
+      document.getElementById('taxLabel').textContent = 'Bs ' + tax.toFixed(2);
+      document.getElementById('totalLabel').textContent = 'Bs ' + total.toFixed(2);
+    }
+
+    // GESTIÓN DE RESEÑAS CON ESTRELLAS
+    document.querySelectorAll('#ratingSelector i').forEach(star => {
+      star.onclick = function() {
+        selectedRating = parseInt(this.getAttribute('data-value'));
+        document.querySelectorAll('#ratingSelector i').forEach(s => {
+          if(parseInt(s.getAttribute('data-value')) <= selectedRating) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      }
+    });
+    // Forzar estrellas por defecto a 5 estrellas iluminadas al iniciar
+    document.querySelectorAll('#ratingSelector i').forEach(s => s.classList.add('active'));
+
+    function submitReview() {
+      const txt = document.getElementById('reviewText').value.trim();
+      if(!txt) return alert("Por favor escribe un comentario para tu reseña.");
+      
+      let starsHtml = '';
+      for(let i=1; i<=5; i++) {
+        starsHtml += `<i class="${i <= selectedRating ? 'fas' : 'far'} fa-star"></i>`;
+      }
+
+      const grid = document.getElementById('reviewsGrid');
+      const newCard = document.createElement('div');
+      newCard.className = 'review-card';
+      newCard.innerHTML = `
+        <div class="stars" style="color: #f1c40f; margin-bottom: 15px;">${starsHtml}</div>
+        <p class="review-text">"${txt}"</p>
+        <div class="review-user">- Cliente Satisfecho</div>
+      `;
+      grid.insertBefore(newCard, grid.firstChild);
+      
+      // Resetear campo
+      document.getElementById('reviewText').value = '';
+      alert("¡Gracias! Tu reseña ha sido enviada con éxito.");
+    }
+
+    // MINI CALENDARIO INTERACTIVO - JULIO 2026 (Como ejemplo ilustrativo)
+    function initMiniCalendar() { renderCalendarDays(); }
+
+    let currentMonthIdx = 6; // Julio
+    const months2026 = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const daysInMonths2026 = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const startDays2026 = [4, 0, 0, 3, 5, 1, 3, 6, 2, 4, 0, 2]; // Day of week index for 1st of each month (0=Dom, 1=Lun, etc.)
+
+    function changeMonth(dir) {
+      currentMonthIdx = (currentMonthIdx + dir + 12) % 12;
+      document.getElementById('calendarMonthYear').textContent = months2026[currentMonthIdx] + ' 2026';
+      renderCalendarDays();
+    }
+
+    function renderCalendarDays() {
+      const grid = document.getElementById('calendarGrid');
+      if(!grid) return;
+      grid.innerHTML = '';
+      
+      const dayNames = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+      dayNames.forEach(d => { grid.innerHTML += `<div class="day-name">${d}</div>`; });
+      
+      let spaces = startDays2026[currentMonthIdx];
+      for(let i = 0; i < spaces; i++) { grid.innerHTML += `<div class="calendar-day empty"></div>`; }
+      
+      let days = daysInMonths2026[currentMonthIdx];
+      for(let day = 1; day <= days; day++) {
+        grid.innerHTML += `<div class="calendar-day" data-day="${day}" onclick="selectCalendarDay(${day})">${day}</div>`;
+      }
+      selectedDay2026 = null;
+    }
+
+function old_initMiniCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+      
+      const dayNames = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+      dayNames.forEach(d => {
+        grid.innerHTML += `<div class="day-name">${d}</div>`;
+      });
+      
+      // Julio 2026 empieza en Miércoles (3 espacios vacíos en calendario de Dom a Sáb)
+      for(let i = 0; i < 3; i++) {
+        grid.innerHTML += `<div class="calendar-day empty"></div>`;
+      }
+      
+      // 31 días de Julio
+      for(let day = 1; day <= 31; day++) {
+        grid.innerHTML += `<div class="calendar-day" data-day="${day}" onclick="selectCalendarDay(${day})">${day}</div>`;
+      }
+    }
+
+    function selectCalendarDay(day) {
+      selectedDay2026 = day;
+      document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected'));
+      event.target.classList.add('selected');
+    }
+
+    // RESERVAS
+    function old_handleReserve(e) {
+} function handleReserve(e) {
+      e.preventDefault();
+      if(!selectedDay2026) {
+        return alert("Por favor selecciona un día del mini calendario para tu reserva.");
+      }
+      const nombre = e.target.querySelector('input[placeholder="Nombre completo"]').value;
+      const time = document.getElementById('bookingTime').value;
+      const mesAnio = document.getElementById('calendarMonthYear').textContent;
+      
+      const textoWhatsApp = `¡Hola Café Aroma! Quiero confirmar una reserva a nombre de: *${nombre}*. Día: *${selectedDay2026} de ${mesAnio}*. Hora: *${time}*. Por favor me confirman disponibilidad. ¡Gracias!`;
+      const urlWhatsApp = `https://wa.me/59176721293?text=${encodeURIComponent(textoWhatsApp)}`;
+      
+      // Abrir WhatsApp en una nueva pestaña
+      window.open(urlWhatsApp, '_blank');
+      
+      alert(`Redirigiendo a WhatsApp para confirmar tu reserva para el ${selectedDay2026} de ${mesAnio} a las ${time}.`);
+      e.target.reset();
+      selectedDay2026 = null;
+      document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected'));
+    }
+function hidden_handleReserve(e) {
+      e.preventDefault();
+      if(!selectedDay2026) {
+        return alert("Por favor selecciona un día del mini calendario para tu reserva.");
+      }
+      const time = document.getElementById('bookingTime').value;
+      alert(`¡Mesa reservada con éxito para el ${selectedDay2026} de Julio de 2026 a las ${time} en Café Aroma Premium!`);
+      e.target.reset();
+      selectedDay2026 = null;
+      document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected'));
+    }
+
+    function updatePaymentForm(method) {
+      document.getElementById('cardFieldsContainer').style.display = (method === 'Tarjeta') ? 'block' : 'none';
+      document.getElementById('cashPickupContainer').style.display = (method === 'Efectivo') ? 'block' : 'none';
+    }
+
+    // PASARELA CHECKOUT MULTI-PANTALLA
+    function goToStep(stepNum) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step' + stepNum).classList.add('active');
+
+      if(stepNum === 2) {
+        let method = document.querySelector('input[name="payMethod"]:checked').value;
+        let orderNum = Math.floor(Math.random() * 90000) + 10000;
+        let totalVal = document.getElementById('totalLabel').textContent;
+        
+        let ticket = `=================================<br>`;
+        ticket += `       CAFÉ AROMA PREMIUM<br>`;
+        ticket += `   Plaza del Maestro, La Paz<br>`;
+        ticket += `=================================<br>`;
+        ticket += `FECHA: 2026-07-04<br>`;
+        ticket += `ORDEN NRO: #${orderNum}<br>`;
+        ticket += `---------------------------------<br>`;
+        for (let k in cart) {
+          ticket += `${data[k][0].padEnd(22, ' ')} x${cart[k]} (Bs ${cart[k]*data[k][1]})<br>`;
+        }
+        ticket += `---------------------------------<br>`;
+        ticket += `MÉTODO: ${method}<br>`;
+        ticket += `---------------------------------<br>`;
+        ticket += `<strong>TOTAL: ${totalVal}</strong><br>`;
+        ticket += `=================================<br>`;
+        
+        if (method === "QR") {
+          ticket += `<div style="text-align:center; margin: 15px 0; padding: 10px; background:#f5f5f5; border-radius:8px; border:1px dashed #ccc;">`;
+          ticket += `<p style="font-size:12px; margin-bottom:8px; color:#555; font-family:'Plus Jakarta Sans',sans-serif;"><b>Escanear para pagar con Simple QR</b></p>`;
+          // Usamos una imagen de QR de marcador estético que no es real y simula perfectamente la experiencia
+          ticket += `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=CafeAromaPremiumBoliviaMockQR" alt="QR de Prueba" style="width:150px; height:150px; display:block; margin:0 auto; border: 4px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.1);"><br>`;
+          ticket += `<span style="font-size:11px; color:#c7a17a; font-family:'Plus Jakarta Sans',sans-serif; display:block; margin-top:-5px;">Monto exacto: ${totalVal}</span>`;
+          ticket += `</div>`;
+        } else if (method === "Tarjeta") {
+          let numTarjeta = document.getElementById('mockCardNumber').value || '4552 8741 0024 9632';
+          let terminacion = numTarjeta.slice(-4);
+          ticket += `<div style="margin: 15px 0; padding: 12px; background:#f4f9f4; border-radius:8px; border:1px solid #c2e0c2; font-family:'Plus Jakarta Sans',sans-serif; font-size:12px;">`;
+          ticket += `<p style="color:#1e4620; margin:0 0 5px 0; font-weight:bold;"><i class="fas fa-check-circle"></i> Transacción Electrónica Autorizada</p>`;
+          ticket += `<span style="color:#2e6932; display:block; margin-bottom:3px;"><b>Estado:</b> Aprobado por Pasarela Local</span>`;
+          ticket += `<span style="color:#555; display:block;"><b>Tarjeta:</b> **** **** **** ${terminacion}</span>`;
+          ticket += `<span style="color:#555; display:block;"><b>Código de Aut.:</b> AUTH-${Math.floor(Math.random()*800000)+100000}</span>`;
+          ticket += `</div>`;
+        } else if (method === "Efectivo") {
+          let fechaPick = document.getElementById('pickupDate').value || '2026-07-04';
+          let horaPick = document.getElementById('pickupTime').value || '16:30';
+          ticket += `<div style="margin: 15px 0; padding: 12px; background:#fff9e6; border-radius:8px; border:1px solid #ffeeba; font-family:'Plus Jakarta Sans',sans-serif; font-size:12px;">`;
+          ticket += `<p style="color:#856404; margin:0 0 5px 0; font-weight:bold;"><i class="fas fa-store"></i> Pedido para Retiro programado</p>`;
+          ticket += `<span style="color:#856404; display:block; margin-bottom:3px;"><b>Pago:</b> Efectivo en Caja al Recoger</span>`;
+          ticket += `<span style="color:#555; display:block;"><b>Fecha pautada:</b> ${fechaPick}</span>`;
+          ticket += `<span style="color:#555; display:block;"><b>Hora pautada:</b> ${horaPick}</span>`;
+          ticket += `</div>`;
+        }
+        
+        ticket += ` ¡Gracias por su compra! ❤️`;
+        document.getElementById('receiptContent').innerHTML = ticket;
+      }
+    }
+
+    // DESCARGAR COMPROBANTE DIGITAL EN TEXTO (.TXT)
+    function downloadReceiptFile() {
+      let rawText = document.getElementById('receiptContent').innerHTML;
+      // Reemplazar saltos de línea HTML por saltos reales
+      rawText = rawText.replace(/<br>/g, '\r\n').replace(/<[^>]*>/g, '');
+      
+      const blob = new Blob([rawText], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'Comprobante_Cafe_Aroma.txt';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function closeCheckout() {
+      document.getElementById('dlg').close();
+    }
+
+    function processOrderEnd() {
+      let method = document.querySelector('input[name="payMethod"]:checked').value;
+      let totalVal = document.getElementById('totalLabel').textContent;
+      
+      let itemsList = "";
+      for (let k in cart) {
+        itemsList += `- ${data[k][0]} x${cart[k]} (Bs ${cart[k]*data[k][1]})\n`;
+      }
+      
+      let extraInfo = "";
+      if (method === "Efectivo") {
+        let fechaPick = document.getElementById('pickupDate').value || '2026-07-04';
+        let horaPick = document.getElementById('pickupTime').value || '16:30';
+        extraInfo = `\n📌 *Detalles de Retiro:*\n- Fecha: ${fechaPick}\n- Hora: ${horaPick}\n- Pago: Efectivo en Caja al Recoger`;
+      } else if (method === "QR") {
+        extraInfo = `\n📌 *Detalles de Pago:*\n- Método: Código QR Sin Contacto\n- (Comprobante adjunto por el cliente)`;
+      } else {
+        extraInfo = `\n📌 *Detalles de Pago:*\n- Método: Tarjeta de Crédito/Débito (Autorizado)`;
+      }
+      
+      const textoWhatsApp = `¡Hola Café Aroma! He realizado un nuevo pedido desde la web:\n\n🛒 *PRODUCTOS:*\n${itemsList}\n💰 *TOTAL:* ${totalVal}${extraInfo}\n\nPor favor, preparen mi orden. ¡Gracias!`;
+      const urlWhatsApp = `https://wa.me/59176721293?text=${encodeURIComponent(textoWhatsApp)}`;
+      
+      window.open(urlWhatsApp, '_blank');
+      
+      alert("¡Pedido enviado con éxito! Se abrirá WhatsApp para enviar la orden detallada al negocio.");
+      cart = {};
+      renderCart();
+      closeCheckout();
+      document.getElementById('drawer').classList.remove('open');
+    }
+
+    // CARRUSEL AUTOMÁTICO
+    let currentSlide = 0;
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % 2;
+      const track = document.getElementById('carouselTrack');
+      if (track) track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }, 5000);
+
+    function toggleTheme() {
+      const body = document.body;
+      const themeBtn = document.getElementById('themeBtn').querySelector('i');
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+        themeBtn.className = 'fas fa-moon';
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        themeBtn.className = 'fas fa-sun';
+      }
+    }
+
+    function toggleMobileMenu() {
+      const nav = document.getElementById('navbar');
+      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+      nav.style.flexDirection = 'column';
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.getElementById('search').oninput = e => paint(e.target.value);
+    document.getElementById('cartBtn').onclick = () => document.getElementById('drawer').classList.add('open');
+    document.getElementById('closeDrawerBtn').onclick = () => document.getElementById('drawer').classList.remove('open');
+    document.getElementById('pay').onclick = () => {
+      if(Object.keys(cart).length === 0) return alert("El carrito está vacío.");
+      goToStep(1);
+      document.getElementById('dlg').showModal();
+    };
+
+    // Inicializadores al cargar
+    paint();
+    initMiniCalendar();
+  </script>
+</body>
+</html>
