@@ -46,7 +46,11 @@
 
     /* --- HEADER & NAV --- */
     header { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 16px 6%; background: var(--surface); box-shadow: 0 2px 20px var(--shadow); z-index: 100; transition: var(--transition); }
-    .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+    
+    /* Estilos mejorados para que el logo se vea perfecto en la barra de navegación */
+    .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .logo img { height: 35px; width: auto; object-fit: contain; }
+
     nav { display: flex; gap: 30px; }
     nav a { text-decoration: none; color: var(--text-muted); font-weight: 500; cursor: pointer; transition: var(--transition); }
     nav a:hover, nav a.active { color: var(--primary); }
@@ -61,7 +65,7 @@
     .hero-content h1 { font-size: 48px; margin-bottom: 16px; letter-spacing: 1px; }
     .hero-content p { font-size: 18px; font-weight: 300; opacity: 0.9; }
 
-    /* --- DESTACADOS (CARRUSEL AUTOMÁTICO) --- */
+    /* --- DESTACADOS --- */
     .promo-carousel { max-width: 1200px; margin: 40px auto; padding: 0 20px; position: relative; overflow: hidden; }
     .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
     .carousel-slide { min-width: 100%; display: flex; align-items: center; background: var(--surface); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px var(--shadow); border: 1px solid var(--border); }
@@ -215,7 +219,11 @@
 <body>
 
   <header>
-    <div class="logo">☕ Café Aroma</div>
+    <div class="logo" onclick="scrollToSection('hero')">
+      <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png" alt="Logo">
+      <span>Café Aroma</span>
+    </div>
+    
     <nav id="navbar">
       <a onclick="scrollToSection('hero')" class="active">Inicio</a>
       <a onclick="scrollToSection('shop-controls')">Menú</a>
@@ -382,7 +390,6 @@
   </dialog>
 
   <script>
-    // --- LÓGICA DE JAVASCRIPT RESTAURADA TOTALMENTE ---
     const products = [
       { id: 1, name: 'Espresso Tradicional', price: 14, category: 'cafes', img: 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=500&q=80' },
       { id: 2, name: 'Café Latte Cremoso', price: 18, category: 'cafes', img: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80' },
@@ -396,7 +403,7 @@
     let cart = [];
     let currentRating = 0;
     let currentYear = 2026;
-    let currentMonth = 6; // Julio (0-indexed)
+    let currentMonth = 6; 
     let selectedDateStr = "";
 
     function renderProducts(items) {
@@ -554,7 +561,6 @@
     function processOrderEnd() { cart = []; updateCart(); closeCheckout(); alert('¡Gracias por tu compra!'); }
     function downloadReceiptFile() { alert('Descargando comprobante en tu dispositivo...'); }
 
-    // Init
     renderProducts(products);
     renderCalendar();
   </script>
