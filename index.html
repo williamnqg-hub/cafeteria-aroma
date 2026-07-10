@@ -3,25 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- 1. El título principal que saldrá en las búsquedas -->
-  <title>Cafetería Aroma</title>
-
-  <!-- 2. La descripción corta y atractiva para Google -->
-  <meta name="description" content="Disfruta del mejor café premium en Cafetería Aroma. Ofrecemos espressos, repostería artesanal y un ambiente único para compartir. ¡Visítanos!">
-
-  <!-- 3. Etiquetas Open Graph (Para redes sociales y optimización en Google) -->
-  <meta property="og:title" content="Cafetería Aroma">
-  <meta property="og:description" content="Disfruta del mejor café premium en Cafetería Aroma. Ofrecemos espressos, repostería artesanal y un ambiente único para compartir.">
-  <meta property="og:image" content="https://williamnqg-hub.github.io/cafeteria-aroma/img/logo-compartir.jpg">
-  <meta property="og:url" content="https://williamnqg-hub.github.io/cafeteria-aroma/">
-  <meta property="og:type" content="website">
-
-  <!-- Google Fonts -->
+  <title>Café Aroma Premium - Café de Especialidad</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -76,7 +61,6 @@
     .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
     .carousel-slide { min-width: 100%; display: flex; align-items: center; background: var(--surface); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px var(--shadow); border: 1px solid var(--border); }
     .carousel-img { width: 50%; height: 350px; object-fit: cover; }
-    .carousel-img, .carousel-info { width: 50%; height: auto; }
     .carousel-info { padding: 40px; width: 50%; }
     .carousel-info h3 { font-size: 28px; margin-bottom: 10px; color: var(--primary); }
     .carousel-info p { color: var(--text-muted); margin-bottom: 20px; }
@@ -137,7 +121,7 @@
     .booking-form { background: var(--surface); padding: 30px; border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 10px 30px var(--shadow); }
     .booking-form h3 { margin-bottom: 20px; font-size: 24px; }
     .form-group { margin-bottom: 15px; }
-    .form-group input, .form-group select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; }
+    .form-group input, .form-group select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; font-family: inherit; }
     
     /* Mini Calendario Custom 2026 */
     .mini-calendar { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; }
@@ -197,12 +181,11 @@
     .btn-dialog.cancel { background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); }
     
     /* --- COMPROBANTE DE PAGO --- */
-    .receipt { background: var(--bg); padding: 20px; border-radius: 12px; border: 1px dashed var(--accent); font-family: monospace; font-size: 14px; margin-top: 15px; max-height: 250px; overflow-y: auto; }
+    .receipt { background: var(--bg); padding: 20px; border-radius: 12px; border: 1px dashed var(--accent); font-family: monospace; font-size: 14px; margin-top: 15px; max-height: 250px; overflow-y: auto; color: #000; }
     .btn-download-receipt { width: 100%; background: #27ae60; color: white; border: none; padding: 12px; border-radius: 30px; font-weight: 600; margin-top: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition); }
     .btn-download-receipt:hover { background: #219653; }
 
     /* --- FLOATING EFFECT & FLOATING WHATSAPP --- */
-    .fly { position: fixed; pointer-events: none; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 24px; z-index: 2000; }
     .whatsapp-btn { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; z-index: 99; transition: var(--transition); }
     .whatsapp-btn:hover { transform: scale(1.1); background: #20ba5a; }
 
@@ -218,18 +201,19 @@
     /* --- RESPONSIVE --- */
     @media (max-width: 768px) {
       nav { display: none; }
+      nav.responsive { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background: var(--surface); padding: 20px; box-shadow: 0 10px 20px var(--shadow); gap: 15px; }
       .menu-toggle { display: block; font-size: 22px; background: none; border: none; color: var(--text); cursor: pointer; }
       .about-section { flex-direction: column; padding: 40px 20px; }
       .extra-grid { grid-template-columns: 1fr; }
       .map-box { grid-column: span 1; }
       .carousel-slide { flex-direction: column; }
+      .carousel-img, .carousel-info { width: 100%; height: auto; }
       .carousel-info { padding: 25px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="logo">☕ Café Aroma</div>
     <nav id="navbar">
@@ -240,7 +224,7 @@
     </nav>
     <div class="nav-actions">
       <button class="btn-icon" id="themeBtn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-      <button class="btn-icon" id="cartBtn">
+      <button class="btn-icon" id="cartBtn" onclick="toggleDrawer()">
         <i class="fas fa-shopping-bag"></i>
         <span id="count">0</span>
       </button>
@@ -248,7 +232,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-content">
       <h1>Cada taza cuenta una historia</h1>
@@ -256,7 +239,6 @@
     </div>
   </section>
 
-  <!-- DESTACADOS / CARRUSEL -->
   <section class="promo-carousel">
     <div class="carousel-track" id="carouselTrack">
       <div class="carousel-slide">
@@ -268,7 +250,7 @@
           <strong>¡Pruébalo hoy por solo Bs 24!</strong>
         </div>
       </div>
-      <div class="carousel-slide">
+      <div class="carousel-slide" style="display:none;">
         <img class="carousel-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80" alt="Promo 2">
         <div class="carousel-info">
           <span class="badge">Nuevos Sabores</span>
@@ -280,7 +262,6 @@
     </div>
   </section>
 
-  <!-- CONTROLES TIENDA (BUSCADOR Y CATEGORÍAS) -->
   <div class="shop-controls" id="shop-controls">
     <div class="categories" id="categoriesContainer">
       <button class="cat-btn active" onclick="filterCategory('todos')">Todos</button>
@@ -290,14 +271,12 @@
     </div>
     <div class="search-wrapper">
       <i class="fas fa-search"></i>
-      <input id="search" placeholder="Buscar en el menú...">
+      <input id="search" placeholder="Buscar en el menú..." oninput="handleSearch()">
     </div>
   </div>
 
-  <!-- PRODUCTOS GRID -->
   <div id="products" class="grid"></div>
 
-  <!-- SOBRE NOSOTROS -->
   <section class="about-section" id="about">
     <div class="about-content">
       <h2>Nuestra Pasión por el Grano</h2>
@@ -309,19 +288,17 @@
     </div>
   </section>
 
-  <!-- RESEÑAS -->
   <section class="reviews-section">
     <h2>Lo que dicen nuestros Coffee Lovers</h2>
     
-    <!-- Barra para dejar Reseñas y Puntuar -->
     <div class="review-form-container">
       <h3>Califica tu experiencia</h3>
       <div class="rating-selector" id="ratingSelector">
-        <i class="fas fa-star" data-value="1"></i>
-        <i class="fas fa-star" data-value="2"></i>
-        <i class="fas fa-star" data-value="3"></i>
-        <i class="fas fa-star" data-value="4"></i>
-        <i class="fas fa-star" data-value="5"></i>
+        <i class="fas fa-star" data-value="1" onclick="setRating(1)"></i>
+        <i class="fas fa-star" data-value="2" onclick="setRating(2)"></i>
+        <i class="fas fa-star" data-value="3" onclick="setRating(3)"></i>
+        <i class="fas fa-star" data-value="4" onclick="setRating(4)"></i>
+        <i class="fas fa-star" data-value="5" onclick="setRating(5)"></i>
       </div>
       <textarea id="reviewText" placeholder="Escribe tu opinión aquí..."></textarea>
       <button class="btn-submit" onclick="submitReview()">Publicar Reseña</button>
@@ -341,7 +318,6 @@
     </div>
   </section>
 
-  <!-- EXTRAS: GALERÍA Y RESERVAS + MAPA -->
   <div class="extra-grid" id="booking">
     <div>
       <h3 style="margin-bottom: 20px; font-size: 24px;">Galería Aroma</h3>
@@ -356,16 +332,14 @@
     <div class="booking-form">
       <h3>Reserva tu Mesa (Año 2026)</h3>
       <form onsubmit="handleReserve(event)">
-        <div class="form-group"><input type="text" placeholder="Nombre completo" required></div>
+        <div class="form-group"><input type="text" id="reserveName" placeholder="Nombre completo" required></div>
         
-        <!-- Mini Calendario Interactivo 2026 -->
         <div class="mini-calendar">
           <div class="calendar-header">
             <button type="button" onclick="changeMonth(-1)" class="cat-btn" style="padding: 2px 8px; font-size: 12px;"><</button><span id="calendarMonthYear">Julio 2026</span><button type="button" onclick="changeMonth(1)" class="cat-btn" style="padding: 2px 8px; font-size: 12px;">></button>
           </div>
           <div class="calendar-days-grid" id="calendarGrid">
-            <!-- Rellenado dinámicamente por JS -->
-          </div>
+            </div>
         </div>
         
         <div class="form-group">
@@ -375,27 +349,23 @@
       </form>
     </div>
 
-    <!-- Caja del Mapa en Plaza del Maestro, La Paz (Bolivia) con botón de indicaciones -->
     <div class="map-box">
       <div class="map-bar">
         <span><i class="fas fa-map-marker-alt"></i> Plaza del Maestro, Villa Fátima (La Paz)</span>
-        <!-- Enlace real a Google Maps configurado para dar indicaciones (Directions) directo a la ubicación -->
-        <a class="btn-directions" href="https://www.google.com/maps/dir/?api=1&destination=-16.4839,-68.1132" target="_blank">
+        <a class="btn-directions" href="https://maps.google.com/?q=Plaza+del+Maestro+Villa+Fatima+La+Paz" target="_blank">
           <i class="fas fa-route"></i> Cómo llegar / Indicaciones
         </a>
       </div>
       <div class="map-container">
-        <!-- Mapa de OpenStreetMap centrado exactamente en Plaza del Maestro, La Paz, Bolivia -->
         <iframe width="100%" height="100%" frameborder="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-68.1180%2C-16.4880%2C-68.1084%2C-16.4795&layer=mapnik&marker=-16.4839%2C-68.1132" style="border: 0;"></iframe>
       </div>
     </div>
   </div>
 
-  <!-- CARRITO / DRAWER -->
   <div id="drawer">
     <div class="drawer-header">
       <h2>Tu Carrito</h2>
-      <button class="drawer-close-btn" id="closeDrawerBtn">
+      <button class="drawer-close-btn" id="closeDrawerBtn" onclick="toggleDrawer()">
          Volver <i class="fas fa-arrow-right"></i>
       </button>
     </div>
@@ -405,13 +375,11 @@
       <div class="summary-line"><span>Subtotal:</span><span id="subtotalLabel">Bs 0</span></div>
       <div class="summary-line"><span>Impuestos (IVA 13%):</span><span id="taxLabel">Bs 0</span></div>
       <div class="summary-line summary-total"><span>Total:</span><span id="totalLabel">Bs 0</span></div>
-      <button id="pay">Proceder al Pago</button>
+      <button id="pay" onclick="openCheckout()">Proceder al Pago</button>
     </div>
   </div>
 
-  <!-- DIALOG CHECKOUT MULTI-PANTALLA -->
   <dialog id="dlg">
-    <!-- Pantalla 1: Método de Pago -->
     <div class="step active" id="step1">
       <h2>Método de Pago</h2>
       <p>Selecciona la opción de tu preferencia:</p>
@@ -421,13 +389,12 @@
         <label class="radio-label"><input type="radio" name="payMethod" value="Efectivo" onclick="updatePaymentForm('Efectivo')"> <i class="fas fa-money-bill-wave"></i> Efectivo en Caja</label>
       </div>
       
-      <!-- Campos para programar fecha/hora de retiro cuando es Efectivo en Caja -->
-      <div id="cashPickupContainer" style="display: none; margin-top: 15px; padding: 12px; background: #fdfbf7; border: 1px solid #eeded1; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif;">
+      <div id="cashPickupContainer" style="display: none; margin-top: 15px; padding: 12px; background: #fdfbf7; border: 1px solid #eeded1; border-radius: 8px;">
         <p style="margin: 0 0 10px 0; font-size: 12px; color: #4e342e; font-weight: bold;"><i class="fas fa-clock"></i> Programar fecha y hora de recogida</p>
         <div style="display: table; width: 100%;">
           <div style="display: table-cell; width: 50%; padding-right: 4px;">
             <label style="font-size:11px; color:#706461; display:block; margin-bottom:3px;">Fecha de retiro:</label>
-            <input type="date" id="pickupDate" style="width:100%; padding:8px; border:1px solid #eeded1; border-radius:6px; font-size:13px;" value="2026-07-04">
+            <input type="date" id="pickupDate" style="width:100%; padding:8px; border:1px solid #eeded1; border-radius:6px; font-size:13px;" value="2026-07-10">
           </div>
           <div style="display: table-cell; width: 50%; padding-left: 4px;">
             <label style="font-size:11px; color:#706461; display:block; margin-bottom:3px;">Hora de retiro:</label>
@@ -436,8 +403,7 @@
         </div>
       </div>
 
-      <!-- Campos de tarjeta simulados para máxima profesionalidad -->
-      <div id="cardFieldsContainer" style="margin-top: 15px; padding: 12px; background: #fdfbf7; border: 1px solid #eeded1; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif;">
+      <div id="cardFieldsContainer" style="margin-top: 15px; padding: 12px; background: #fdfbf7; border: 1px solid #eeded1; border-radius: 8px;">
         <p style="margin: 0 0 10px 0; font-size: 12px; color: #4e342e; font-weight: bold;"><i class="fas fa-lock"></i> Pago Seguro de Prueba (Simulado)</p>
         <div style="margin-bottom: 8px;">
           <input type="text" id="mockCardNumber" placeholder="Número de Tarjeta (4500 0000 0000 0000)" style="width:100%; padding:8px; border:1px solid #eeded1; border-radius:6px; font-size:13px;" maxlength="19" value="4552 8741 0024 9632">
@@ -457,7 +423,6 @@
       </div>
     </div>
 
-    <!-- Pantalla 2: Resumen y Confirmación con opción de Descarga -->
     <div class="step" id="step2">
       <h2>Confirmación</h2>
       <p>Tu orden ha sido aprobada con éxito.</p>
@@ -472,12 +437,10 @@
     </div>
   </dialog>
 
-  <!-- WHATSAPP FLOATING BUTTON -->
-  <a href="https://wa.me/59176721293?text=Hola!%20Me%20gustaría%20hacer%20un%20pedido%20de%20Café%20Aroma." class="whatsapp-btn" target="_blank">
+  <a href="https://wa.me/59176721293?text=Hola!%20Me%20gustaría%20hacer%20un%20pedido%20de%20Café%20Aroma." id="whatsappFloatingBtn" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
@@ -491,7 +454,7 @@
       </div>
       <div class="footer-col">
         <h4>Contacto</h4>
-        <p><i class="fas fa-phone"></i> +591 70000000</p>
+        <p><i class="fas fa-phone"></i> +591 76721293</p>
         <p><i class="fas fa-envelope"></i> info@cafearoma.com</p>
       </div>
     </div>
@@ -501,395 +464,415 @@
   </footer>
 
   <script>
-    const data = [
-      ['Capuccino Tradicional', 18, 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80', 'cafes'],
-      ['Latte Macchiato', 20, 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80', 'cafes'],
-      ['Espresso Intenso', 14, 'https://images.unsplash.com/photo-1510707577719-0d458b3dc4f4?auto=format&fit=crop&w=600&q=80', 'cafes'],
-      ['Iced Latte Vainilla', 22, 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80', 'bebidas-frias'],
-      ['Frappé de Caramelo', 25, 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80', 'bebidas-frias'],
-      ['Cheesecake New York', 22, 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80', 'postres'],
-      ['Croissant de Almendras', 16, 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80', 'postres']
+    // Base de datos integrada de los productos de la Cafetería
+    const menuProducts = [
+      { id: 1, name: 'Espresso Intenso', price: 14, category: 'cafes', img: 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=500&q=80' },
+      { id: 2, name: 'Capuccino Tradicional', price: 18, category: 'cafes', img: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=500&q=80' },
+      { id: 3, name: 'Café Latte Cremoso', price: 18, category: 'cafes', img: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80' },
+      { id: 4, name: 'Frappé de Oreo & Crema', price: 25, category: 'bebidas-frias', img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=500&q=80' },
+      { id: 5, name: 'Iced Latte Vainilla', price: 22, category: 'bebidas-frias', img: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=500&q=80' },
+      { id: 6, name: 'Cheesecake de Frutos Rojos', price: 24, category: 'postres', img: 'https://images.unsplash.com/photo-1524351199679-46cddf530c04?auto=format&fit=crop&w=500&q=80' },
+      { id: 7, name: 'Tarta de Chocolate Amargo', price: 22, category: 'postres', img: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=500&q=80' },
+      { id: 8, name: 'Croissant Premium de Mantequilla', price: 12, category: 'postres', img: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=500&q=80' }
     ];
 
-    let cart = {};
-    let currentCategory = 'todos';
-    let selectedRating = 5;
-    let selectedDay2026 = null;
+    let currentCart = [];
+    let activeRating = 0;
+    let selectedCalendarDay = null;
+    let currentYear = 2026;
+    let currentMonth = 6; // Julio (0-indexed base, 6 es Julio)
 
-    // RENDERIZAR PRODUCTOS
-    function paint(filterText = '') {
-      const grid = document.getElementById('products');
-      grid.innerHTML = '';
-      
-      data.forEach((p, i) => {
-        if (currentCategory !== 'todos' && p[3] !== currentCategory) return;
-        if (!p[0].toLowerCase().includes(filterText.toLowerCase())) return;
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-        grid.innerHTML += `
+    // Carga Inicial del Sistema
+    window.addEventListener('DOMContentLoaded', () => {
+      renderMenuCards(menuProducts);
+      buildCalendar(currentMonth, currentYear);
+      startCarouselAutoPlay();
+    });
+
+    // Desplazamiento Suave por Secciones
+    function scrollToSection(id) {
+      const section = document.getElementById(id);
+      if(section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        // Actualizar clase activa del navbar
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+        event?.target?.classList?.add('active');
+      }
+    }
+
+    // Alternar Menú Móvil Hamburguesa
+    function toggleMobileMenu() {
+      const nav = document.getElementById('navbar');
+      nav.classList.toggle('responsive');
+    }
+
+    // Alternar Tema Oscuro / Claro
+    function toggleTheme() {
+      const body = document.body;
+      const themeBtnIcon = document.querySelector('#themeBtn i');
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+        themeBtnIcon.className = 'fas fa-moon';
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        themeBtnIcon.className = 'fas fa-sun';
+      }
+    }
+
+    // Renderizar las Tarjetas del Menú Dinámicamente
+    function renderMenuCards(productsArray) {
+      const container = document.getElementById('products');
+      container.innerHTML = '';
+      if(productsArray.length === 0) {
+        container.innerHTML = '<p style="grid-column: span 4; text-align:center; color:var(--text-muted);">No se encontraron productos.</p>';
+        return;
+      }
+      productsArray.forEach(prod => {
+        container.innerHTML += `
           <div class="card">
             <div class="img-container">
-              <img src="${p[2]}" alt="${p[0]}">
+              <img src="${prod.img}" alt="${prod.name}">
             </div>
             <div class="card-body">
-              <h3>${p[0]}</h3>
+              <h3>${prod.name}</h3>
               <div class="price-row">
-                <span class="price">Bs ${p[1]}</span>
-                <button class="btn-add" onclick="addToCart(${i}, event)">
+                <span class="price">Bs ${prod.price}</span>
+                <button class="btn-add" onclick="addItemToCart(${prod.id})">
                   <i class="fas fa-plus"></i> Agregar
                 </button>
               </div>
             </div>
-          </div>`;
+          </div>
+        `;
       });
     }
 
+    // Filtrar por Categoría
     function filterCategory(cat) {
-      currentCategory = cat;
       document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
-      paint(document.getElementById('search').value);
+      if(cat === 'todos') {
+        renderMenuCards(menuProducts);
+      } else {
+        const filtered = menuProducts.filter(p => p.category === cat);
+        renderMenuCards(filtered);
+      }
     }
 
-    function addToCart(i, e) {
-      cart[i] = (cart[i] || 0) + 1;
+    // Filtrar mediante Buscador de Texto
+    function handleSearch() {
+      const query = document.getElementById('search').value.toLowerCase();
+      const filtered = menuProducts.filter(p => p.name.toLowerCase().includes(query));
+      renderMenuCards(filtered);
+    }
+
+    // Funcionamiento Automático del Carrusel de Promociones
+    function startCarouselAutoPlay() {
+      const slides = document.querySelectorAll('.carousel-slide');
+      let index = 0;
+      setInterval(() => {
+        slides[index].style.display = 'none';
+        index = (index + 1) % slides.length;
+        slides[index].style.display = 'flex';
+      }, 5000);
+    }
+
+    // Abrir y Cerrar Carrito Lateral (Drawer)
+    function toggleDrawer() {
+      document.getElementById('drawer').classList.toggle('open');
+    }
+
+    // Añadir Elemento al Carrito de Compras
+    function addItemToCart(id) {
+      const product = menuProducts.find(p => p.id === id);
+      const exists = currentCart.find(item => item.id === id);
+      if(exists) {
+        exists.qty++;
+      } else {
+        currentCart.push({ ...product, qty: 1 });
+      }
+      updateCartUI();
+    }
+
+    // Modificar la Cantidad de un Elemento en el Carrito
+    function updateQty(id, change) {
+      const item = currentCart.find(p => p.id === id);
+      if(item) {
+        item.qty += change;
+        if(item.qty <= 0) {
+          currentCart = currentCart.filter(p => p.id !== id);
+        }
+      }
+      updateCartUI();
+    }
+
+    // Eliminar un Producto Completo del Carrito
+    function deleteCartItem(id) {
+      currentCart = currentCart.filter(p => p.id !== id);
+      updateCartUI();
+    }
+
+    // Actualizar Interfaz Completa del Carrito de Compras
+    function updateCartUI() {
+      const listContainer = document.getElementById('list');
+      const countBadge = document.getElementById('count');
       
-      const b = e.target.getBoundingClientRect();
-      const f = document.createElement('div');
-      f.className = 'fly';
-      f.textContent = '☕';
-      f.style.left = b.left + 'px';
-      f.style.top = b.top + 'px';
-      document.body.appendChild(f);
-      
-      setTimeout(() => {
-        f.style.left = (window.innerWidth - 50) + 'px';
-        f.style.top = '20px';
-        f.style.opacity = 0;
-        f.style.transform = 'scale(0.3)';
-      }, 20);
-      
-      setTimeout(() => f.remove(), 800);
-      renderCart();
-    }
+      let subtotal = 0;
+      let totalQty = 0;
 
-    function changeQty(i, amt) {
-      if (!cart[i]) return;
-      cart[i] += amt;
-      if (cart[i] <= 0) delete cart[i];
-      renderCart();
-    }
+      if(currentCart.length === 0) {
+        listContainer.innerHTML = '<p style="text-align:center; color:var(--text-muted); margin-top:40px;">Tu carrito está vacío.</p>';
+        countBadge.innerText = '0';
+        document.getElementById('subtotalLabel').innerText = 'Bs 0';
+        document.getElementById('taxLabel').innerText = 'Bs 0';
+        document.getElementById('totalLabel').innerText = 'Bs 0';
+        return;
+      }
 
-    function deleteItem(i) {
-      delete cart[i];
-      renderCart();
-    }
-
-    // CALCULO DE CARRITO SIN DESCUENTO DEL 10%
-    function renderCart() {
-      let html = '', subtotal = 0, totalItems = 0;
-
-      for (let k in cart) {
-        let q = cart[k], p = data[k];
-        let s = q * p[1];
-        subtotal += s;
-        totalItems += q;
-
-        html += `
+      listContainer.innerHTML = '';
+      currentCart.forEach(item => {
+        subtotal += (item.price * item.qty);
+        totalQty += item.qty;
+        listContainer.innerHTML += `
           <div class="cart-item">
-            <img src="${p[2]}" class="cart-item-img">
+            <img src="${item.img}" class="cart-item-img">
             <div class="cart-item-details">
-              <div class="cart-item-title">${p[0]}</div>
-              <div class="cart-item-price">Bs ${s}</div>
+              <div class="cart-item-title">${item.name}</div>
+              <div class="cart-item-price">Bs ${item.price}</div>
               <div class="quantity-controls">
-                <button class="qty-btn" onclick="changeQty(${k}, -1)">-</button>
-                <span>${q}</span>
-                <button class="qty-btn" onclick="changeQty(${k}, 1)">+</button>
+                <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+                <span>${item.qty}</span>
+                <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
               </div>
             </div>
-            <button class="btn-delete" onclick="deleteItem(${k})"><i class="fas fa-trash-alt"></i></button>
-          </div>`;
+            <button class="btn-delete" onclick="deleteCartItem(${item.id})"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        `;
+      });
+
+      countBadge.innerText = totalQty;
+      const tax = subtotal * 0.13; // Cálculo de IVA 13% en Bolivia
+      const total = subtotal + tax;
+
+      document.getElementById('subtotalLabel').innerText = `Bs ${subtotal.toFixed(2)}`;
+      document.getElementById('taxLabel').innerText = `Bs ${tax.toFixed(2)}`;
+      document.getElementById('totalLabel').innerText = `Bs ${total.toFixed(2)}`;
+    }
+
+    // Sistema de Checkout Multi-Pantalla
+    function openCheckout() {
+      if(currentCart.length === 0) {
+        alert('Agrega productos al carrito primero.');
+        return;
       }
-
-      document.getElementById('count').textContent = totalItems;
-      document.getElementById('list').innerHTML = html || '<p style="color:var(--text-muted);">Tu carrito está vacío.</p>';
-      
-      let tax = subtotal * 0.13; // IVA 13%
-      let total = subtotal + tax;
-
-      document.getElementById('subtotalLabel').textContent = 'Bs ' + subtotal.toFixed(2);
-      document.getElementById('taxLabel').textContent = 'Bs ' + tax.toFixed(2);
-      document.getElementById('totalLabel').textContent = 'Bs ' + total.toFixed(2);
-    }
-
-    // GESTIÓN DE RESEÑAS CON ESTRELLAS
-    document.querySelectorAll('#ratingSelector i').forEach(star => {
-      star.onclick = function() {
-        selectedRating = parseInt(this.getAttribute('data-value'));
-        document.querySelectorAll('#ratingSelector i').forEach(s => {
-          if(parseInt(s.getAttribute('data-value')) <= selectedRating) {
-            s.classList.add('active');
-          } else {
-            s.classList.remove('active');
-          }
-        });
-      }
-    });
-    // Forzar estrellas por defecto a 5 estrellas iluminadas al iniciar
-    document.querySelectorAll('#ratingSelector i').forEach(s => s.classList.add('active'));
-
-    function submitReview() {
-      const txt = document.getElementById('reviewText').value.trim();
-      if(!txt) return alert("Por favor escribe un comentario para tu reseña.");
-      
-      let starsHtml = '';
-      for(let i=1; i<=5; i++) {
-        starsHtml += `<i class="${i <= selectedRating ? 'fas' : 'far'} fa-star"></i>`;
-      }
-
-      const grid = document.getElementById('reviewsGrid');
-      const newCard = document.createElement('div');
-      newCard.className = 'review-card';
-      newCard.innerHTML = `
-        <div class="stars" style="color: #f1c40f; margin-bottom: 15px;">${starsHtml}</div>
-        <p class="review-text">"${txt}"</p>
-        <div class="review-user">- Cliente Satisfecho</div>
-      `;
-      grid.insertBefore(newCard, grid.firstChild);
-      
-      // Resetear campo
-      document.getElementById('reviewText').value = '';
-      alert("¡Gracias! Tu reseña ha sido enviada con éxito.");
-    }
-
-    // MINI CALENDARIO INTERACTIVO - JULIO 2026 (Como ejemplo ilustrativo)
-    function initMiniCalendar() { renderCalendarDays(); }
-
-    let currentMonthIdx = 6; // Julio
-    const months2026 = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-    const daysInMonths2026 = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const startDays2026 = [4, 0, 0, 3, 5, 1, 3, 6, 2, 4, 0, 2]; // Day of week index for 1st of each month (0=Dom, 1=Lun, etc.)
-
-    function changeMonth(dir) {
-      currentMonthIdx = (currentMonthIdx + dir + 12) % 12;
-      document.getElementById('calendarMonthYear').textContent = months2026[currentMonthIdx] + ' 2026';
-      renderCalendarDays();
-    }
-
-    function renderCalendarDays() {
-      const grid = document.getElementById('calendarGrid');
-      if(!grid) return;
-      grid.innerHTML = '';
-      
-      const dayNames = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
-      dayNames.forEach(d => { grid.innerHTML += `<div class="day-name">${d}</div>`; });
-      
-      let spaces = startDays2026[currentMonthIdx];
-      for(let i = 0; i < spaces; i++) { grid.innerHTML += `<div class="calendar-day empty"></div>`; }
-      
-      let days = daysInMonths2026[currentMonthIdx];
-      for(let day = 1; day <= days; day++) {
-        grid.innerHTML += `<div class="calendar-day" data-day="${day}" onclick="selectCalendarDay(${day})">${day}</div>`;
-      }
-      selectedDay2026 = null;
-    }
-
-    function selectCalendarDay(day) {
-      selectedDay2026 = day;
-      document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected'));
-      event.target.classList.add('selected');
-    }
-
-    // RESERVAS
-    function handleReserve(e) {
-      e.preventDefault();
-      if(!selectedDay2026) {
-        return alert("Por favor selecciona un día del mini calendario para tu reserva.");
-      }
-      const nombre = e.target.querySelector('input[placeholder="Nombre completo"]').value;
-      const time = document.getElementById('bookingTime').value;
-      const mesAnio = document.getElementById('calendarMonthYear').textContent;
-      
-      const textoWhatsApp = `¡Hola Café Aroma! Quiero confirmar una reserva a nombre de: *${nombre}*. Día: *${selectedDay2026} de ${mesAnio}*. Hora: *${time}*. Por favor me confirman disponibilidad. ¡Gracias!`;
-      const urlWhatsApp = `https://wa.me/59176721293?text=${encodeURIComponent(textoWhatsApp)}`;
-      
-      // Abrir WhatsApp en una nueva pestaña
-      window.open(urlWhatsApp, '_blank');
-      
-      alert(`Redirigiendo a WhatsApp para confirmar tu reserva para el ${selectedDay2026} de ${mesAnio} a las ${time}.`);
-      e.target.reset();
-      selectedDay2026 = null;
-      document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected'));
-    }
-
-    function updatePaymentForm(method) {
-      document.getElementById('cardFieldsContainer').style.display = (method === 'Tarjeta') ? 'block' : 'none';
-      document.getElementById('cashPickupContainer').style.display = (method === 'Efectivo') ? 'block' : 'none';
-    }
-
-    // PASARELA CHECKOUT MULTI-PANTALLA
-    function goToStep(stepNum) {
-      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-      document.getElementById('step' + stepNum).classList.add('active');
-
-      if(stepNum === 2) {
-        let method = document.querySelector('input[name="payMethod"]:checked').value;
-        let orderNum = Math.floor(Math.random() * 90000) + 10000;
-        let totalVal = document.getElementById('totalLabel').textContent;
-        
-        let ticket = `=================================<br>`;
-        let totalItems = 0;
-        ticket += `       CAFÉ AROMA PREMIUM<br>`;
-        ticket += `   Plaza del Maestro, La Paz<br>`;
-        ticket += `=================================<br>`;
-        ticket += `FECHA: 2026-07-04<br>`;
-        ticket += `ORDEN NRO: #${orderNum}<br>`;
-        ticket += `---------------------------------<br>`;
-        for (let k in cart) {
-          ticket += `${data[k][0].padEnd(22, ' ')} x${cart[k]} (Bs ${cart[k]*data[k][1]})<br>`;
-        }
-        ticket += `---------------------------------<br>`;
-        ticket += `MÉTODO: ${method}<br>`;
-        ticket += `---------------------------------<br>`;
-        ticket += `<strong>TOTAL: ${totalVal}</strong><br>`;
-        ticket += `=================================<br>`;
-        
-        if (method === "QR") {
-          ticket += `<div style="text-align:center; margin: 15px 0; padding: 10px; background:#f5f5f5; border-radius:8px; border:1px dashed #ccc;">`;
-          ticket += `<p style="font-size:12px; margin-bottom:8px; color:#555; font-family:'Plus Jakarta Sans',sans-serif;"><b>Escanear para pagar con Simple QR</b></p>`;
-          ticket += `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=CafeAromaPremiumBoliviaMockQR" alt="QR de Prueba" style="width:150px; height:150px; display:block; margin:0 auto; border: 4px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.1);"><br>`;
-          ticket += `<span style="font-size:11px; color:#c7a17a; font-family:'Plus Jakarta Sans',sans-serif; display:block; margin-top:-5px;">Monto exacto: ${totalVal}</span>`;
-          ticket += `</div>`;
-        } else if (method === "Tarjeta") {
-          let numTarjeta = document.getElementById('mockCardNumber').value || '4552 8741 0024 9632';
-          let terminacion = numTarjeta.slice(-4);
-          ticket += `<div style="margin: 15px 0; padding: 12px; background:#f4f9f4; border-radius:8px; border:1px solid #c2e0c2; font-family:'Plus Jakarta Sans',sans-serif; font-size:12px;">`;
-          ticket += `<p style="color:#1e4620; margin:0 0 5px 0; font-weight:bold;"><i class="fas fa-check-circle"></i> Transacción Electrónica Autorizada</p>`;
-          ticket += `<span style="color:#2e6932; display:block; margin-bottom:3px;"><b>Estado:</b> Aprobado por Pasarela Local</span>`;
-          ticket += `<span style="color:#555; display:block;"><b>Tarjeta:</b> **** **** **** ${terminacion}</span>`;
-          ticket += `<span style="color:#555; display:block;"><b>Código de Aut.:</b> AUTH-${Math.floor(Math.random()*800000)+100000}</span>`;
-          ticket += `</div>`;
-        } else if (method === "Efectivo") {
-          let fechaPick = document.getElementById('pickupDate').value || '2026-07-04';
-          let horaPick = document.getElementById('pickupTime').value || '16:30';
-          ticket += `<div style="margin: 15px 0; padding: 12px; background:#fff9e6; border-radius:8px; border:1px solid #ffeeba; font-family:'Plus Jakarta Sans',sans-serif; font-size:12px;">`;
-          ticket += `<p style="color:#856404; margin:0 0 5px 0; font-weight:bold;"><i class="fas fa-store"></i> Pedido para Retiro programado</p>`;
-          ticket += `<span style="color:#856404; display:block; margin-bottom:3px;"><b>Pago:</b> Efectivo en Caja al Recoger</span>`;
-          ticket += `<span style="color:#555; display:block;"><b>Fecha pautada:</b> ${fechaPick}</span>`;
-          ticket += `<span style="color:#555; display:block;"><b>Hora pautada:</b> ${horaPick}</span>`;
-          ticket += `</div>`;
-        }
-        
-        ticket += ` ¡Gracias por su compra! ❤️`;
-        document.getElementById('receiptContent').innerHTML = ticket;
-      }
-    }
-
-    function downloadReceiptFile() {
-      let rawText = document.getElementById('receiptContent').innerHTML;
-      rawText = rawText.replace(/<br>/g, '
-').replace(/<[^>]*>/g, '');
-      
-      const blob = new Blob([rawText], { type: 'text/plain;charset=utf-8' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'Comprobante_Cafe_Aroma.txt';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      document.getElementById('dlg').showModal();
     }
 
     function closeCheckout() {
       document.getElementById('dlg').close();
     }
 
+    function updatePaymentForm(method) {
+      const cardBox = document.getElementById('cardFieldsContainer');
+      const cashBox = document.getElementById('cashPickupContainer');
+      if(method === 'Tarjeta') {
+        cardBox.style.display = 'block';
+        cashBox.style.display = 'none';
+      } else if(method === 'Efectivo') {
+        cardBox.style.display = 'none';
+        cashBox.style.display = 'block';
+      } else {
+        cardBox.style.display = 'none';
+        cashBox.style.display = 'none';
+      }
+    }
+
+    function goToStep(stepNumber) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById(`step${stepNumber}`).classList.add('active');
+      
+      if(stepNumber === 2) {
+        generateReceiptText();
+      }
+    }
+
+    // Generar Comprobante de Venta Digital Estilizado en Monospace
+    function generateReceiptText() {
+      const method = document.querySelector('input[name="payMethod"]:checked').value;
+      let out = `====================================\n`;
+      out += `        CAFÉ AROMA PREMIUM          \n`;
+      out += `  Plaza del Maestro, La Paz (BO)    \n`;
+      out += `====================================\n`;
+      out += `Fecha: 2026-07-10                  \n`;
+      out += `Método: Pago con ${method}        \n`;
+      out += `------------------------------------\n`;
+      
+      let subtotal = 0;
+      currentCart.forEach(i => {
+        let totalItem = i.price * i.qty;
+        subtotal += totalItem;
+        out += `${i.name.padEnd(22)} x${i.qty}  Bs ${totalItem}\n`;
+      });
+      
+      const tax = subtotal * 0.13;
+      const total = subtotal + tax;
+      
+      out += `------------------------------------\n`;
+      out += `SUBTOTAL:             Bs ${subtotal.toFixed(2)}\n`;
+      out += `IVA (13%):            Bs ${tax.toFixed(2)}\n`;
+      out += `TOTAL:                Bs ${total.toFixed(2)}\n`;
+      out += `====================================\n`;
+      out += ` ¡Gracias por apoyar lo artesanal! \n`;
+      out += `====================================`;
+      
+      document.getElementById('receiptContent').innerText = out;
+    }
+
+    // Descargar el Comprobante Digital como Archivo de Texto .TXT
+    function downloadReceiptFile() {
+      const text = document.getElementById('receiptContent').innerText;
+      const blob = new Blob([text], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.download = 'comprobante-cafe-aroma.txt';
+      link.href = window.URL.createObjectURL(blob);
+      link.click();
+    }
+
+    // Finalizar Pedido y Redirección Estratégica Automatizada a WhatsApp
     function processOrderEnd() {
-      let method = document.querySelector('input[name="payMethod"]:checked').value;
-      let totalVal = document.getElementById('totalLabel').textContent;
+      const method = document.querySelector('input[name="payMethod"]:checked').value;
+      let msg = `*NUEVO PEDIDO - CAFÉ AROMA*\n\n`;
+      currentCart.forEach(i => {
+        msg += `• ${i.name} (x${i.qty}) - Bs ${i.price * i.qty}\n`;
+      });
+      msg += `\n*Forma de Pago:* ${method}`;
       
-      let itemsList = "";
-      for (let k in cart) {
-        itemsList += `- ${data[k][0]} x${cart[k]} (Bs ${cart[k]*data[k][1]})
-`;
+      if(method === 'Efectivo') {
+        const d = document.getElementById('pickupDate').value;
+        const t = document.getElementById('pickupTime').value;
+        msg += `\n*Retiro Programado:* Para el día ${d} a las ${t}`;
       }
       
-      let extraInfo = "";
-      if (method === "Efectivo") {
-        let fechaPick = document.getElementById('pickupDate').value || '2026-07-04';
-        let horaPick = document.getElementById('pickupTime').value || '16:30';
-        extraInfo = `
-📌 *Detalles de Retiro:*
-- Fecha: ${fechaPick}
-- Hora: ${horaPick}
-- Pago: Efectivo en Caja al Recoger`;
-      } else if (method === "QR") {
-        extraInfo = `
-📌 *Detalles de Pago:*
-- Método: Código QR Sin Contacto
-- (Comprobante adjunto por el cliente)`;
-      } else {
-        extraInfo = `
-📌 *Detalles de Pago:*
-- Método: Tarjeta de Crédito/Débito (Autorizado)`;
-      }
-      
-      const textoWhatsApp = `¡Hola Café Aroma! He realizado un nuevo pedido desde la web:
+      const totalText = document.getElementById('totalLabel').innerText;
+      msg += `\n\n*Total a pagar:* ${totalText}\n\n_Enviado desde el portal web._`;
 
-🛒 *PRODUCTOS:*
-${itemsList}
-💰 *TOTAL:* ${totalVal}${extraInfo}
-
-Por favor, preparen mi orden. ¡Gracias!`;
-      const urlWhatsApp = `https://wa.me/59176721293?text=${encodeURIComponent(textoWhatsApp)}`;
+      const encoded = encodeURIComponent(msg);
+      window.open(`https://wa.me/59176721293?text=${encoded}`, '_blank');
       
-      window.open(urlWhatsApp, '_blank');
-      
-      alert("¡Pedido enviado con éxito! Se abrirá WhatsApp para enviar la orden detallada al negocio.");
-      cart = {};
-      renderCart();
+      // Limpieza post-venta
+      currentCart = [];
+      updateCartUI();
       closeCheckout();
-      document.getElementById('drawer').classList.remove('open');
     }
 
-    let currentSlide = 0;
-    setInterval(() => {
-      currentSlide = (currentSlide + 1) % 2;
-      const track = document.getElementById('carouselTrack');
-      if (track) track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }, 5000);
+    // Selector de Estrellas para el Formulario de Reseñas
+    function setRating(val) {
+      activeRating = val;
+      const stars = document.querySelectorAll('#ratingSelector i');
+      stars.forEach((star, idx) => {
+        if(idx < val) {
+          star.classList.add('active');
+        } else {
+          star.classList.remove('active');
+        }
+      });
+    }
 
-    function toggleTheme() {
-      const body = document.body;
-      const themeBtn = document.getElementById('themeBtn').querySelector('i');
-      if (body.getAttribute('data-theme') === 'dark') {
-        body.removeAttribute('data-theme');
-        themeBtn.className = 'fas fa-moon';
-      } else {
-        body.setAttribute('data-theme', 'dark');
-        themeBtn.className = 'fas fa-sun';
+    // Agregar Nueva Reseña de Forma Dinámica en Pantalla
+    function submitReview() {
+      const text = document.getElementById('reviewText').value.trim();
+      if(activeRating === 0 || text === "") {
+        alert("Por favor selecciona una calificación de estrellas y escribe una reseña.");
+        return;
+      }
+      
+      const container = document.getElementById('reviewsGrid');
+      let starHTML = '';
+      for(let i=0; i<activeRating; i++) starHTML += '<i class="fas fa-star"></i>';
+      
+      const newCard = document.createElement('div');
+      newCard.className = 'review-card';
+      newCard.innerHTML = `
+        <div class="stars">${starHTML}</div>
+        <p class="review-text">"${text}"</p>
+        <div class="review-user">- Cliente Satisfecho</div>
+      `;
+      
+      container.prepend(newCard);
+      
+      // Limpiar Formulario
+      document.getElementById('reviewText').value = '';
+      setRating(0);
+      alert('¡Gracias por enviar tu opinión!');
+    }
+
+    // Motor de Construcción del Mini-Calendario 2026 Interactivo
+    function buildCalendar(month, year) {
+      const grid = document.getElementById('calendarGrid');
+      document.getElementById('calendarMonthYear').innerText = `${monthNames[month]} ${year}`;
+      grid.innerHTML = '';
+
+      // Cabecera con nombres de días cortos
+      const daysShort = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
+      daysShort.forEach(d => {
+        grid.innerHTML += `<div class="day-name">${d}</div>`;
+      });
+
+      // Primer día del mes y cantidad total de días del mes
+      const firstDayIdx = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // Espacios vacíos antes del inicio del primer día del mes
+      for(let i=0; i<firstDayIdx; i++) {
+        grid.innerHTML += `<div class="calendar-day empty"></div>`;
+      }
+
+      // Rellenado de días numéricos reales
+      for(let day=1; day<=daysInMonth; day++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day';
+        dayDiv.innerText = day;
+        dayDiv.onclick = () => {
+          document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+          dayDiv.classList.add('selected');
+          selectedCalendarDay = `${year}-${String(month+1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        };
+        grid.appendChild(dayDiv);
       }
     }
 
-    function toggleMobileMenu() {
-      const nav = document.getElementById('navbar');
-      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-      nav.style.flexDirection = 'column';
+    // Cambiar de Mes en el Calendario
+    function changeMonth(dir) {
+      currentMonth += dir;
+      if(currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      } else if(currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      buildCalendar(currentMonth, currentYear);
     }
 
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    // Confirmación del Formulario de Reservas hacia WhatsApp
+    function handleReserve(event) {
+      event.preventDefault();
+      const name = document.getElementById('reserveName').value;
+      const time = document.getElementById('bookingTime').value;
+
+      if(!selectedCalendarDay) {
+        alert("Por favor, selecciona una fecha válida del mini calendario.");
+        return;
+      }
+
+      const reserveMessage = `*RESERVA DE MESA - CAFÉ AROMA*\n\n*A nombre de:* ${name}\n*Fecha reservada:* ${selectedCalendarDay}\n*Hora pactada:* ${time} hs\n\n_Solicito confirmación de mesa disponible por este medio._`;
+      window.open(`https://wa.me/59176721293?text=${encodeURIComponent(reserveMessage)}`, '_blank');
+      
+      // Limpiar Formulario de Reserva
+      document.getElementById('reserveName').value = '';
     }
-
-    document.getElementById('search').oninput = e => paint(e.target.value);
-    document.getElementById('cartBtn').onclick = () => document.getElementById('drawer').classList.add('open');
-    document.getElementById('closeDrawerBtn').onclick = () => document.getElementById('drawer').classList.remove('open');
-    document.getElementById('pay').onclick = () => {
-      if(Object.keys(cart).length === 0) return alert("El carrito está vacío.");
-      goToStep(1);
-      document.getElementById('dlg').showModal();
-    };
-
-    paint();
-    initMiniCalendar();
   </script>
 </body>
 </html>
